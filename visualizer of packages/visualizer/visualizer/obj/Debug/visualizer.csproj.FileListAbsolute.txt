@@ -19,3 +19,5 @@ C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\visualizer of 
 C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\visualizer of packages\visualizer\visualizer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\visualizer of packages\visualizer\visualizer\bin\Debug\System.Text.Encoding.CodePages.xml
 C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\visualizer of packages\visualizer\visualizer\obj\Debug\visualizer.csproj.CopyComplete
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\visualizer of packages\visualizer\visualizer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\visualizer of packages\visualizer\visualizer\bin\Debug\Newtonsoft.Json.xml

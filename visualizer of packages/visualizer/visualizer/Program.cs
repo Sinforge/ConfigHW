@@ -1,7 +1,11 @@
 ﻿using AngleSharp.Html.Parser;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,19 +15,92 @@ namespace visualizer
 {
     internal class Program
     {
-        private const string MainGitHubURL = "https://github.com/";
-        private const string MainGitHubURL1 = "https://github.com";
-        private static readonly HttpClient client = new HttpClient();
-        private static readonly HtmlParser parser = new HtmlParser();
+        //Commented code is deprecated)
+        // private const string MainGitHubURL = "https://github.com/";
+        // private const string MainGitHubURL1 = "https://github.com";
+        private const string PypiURL = "https://pypi.org/pypi/";
+        private const string MetadataPath = "C:\\Users\\vladv\\TarDir\\METADATA.txt";
+        private const string PathToLoad = "C:\\Users\\vladv\\TarDir\\my.tar";
+
 
 
         static async Task<int> Main(string[] args)
         {
+            if (File.Exists(MetadataPath))
+            {
+                File.Delete(MetadataPath);
+            }
             string NameOfLibrary = args[0].ToLower();
-            return await GetDependenciesTree(NameOfLibrary, 0);
+            string MetaDataURL = await GetUrlToMetadata(NameOfLibrary); //Получаем ссылка на метаданные
+            GetMetadata(MetaDataURL);//Получаем метаданные пакета
+            List<string> dependenciesList = await GetDependenciesList();//получаем зависимости пакета
+            
+            PrintGraphvizCode(dependenciesList); //Выводит код графа
+
+            return 0;
+
         }
 
-        private static async Task<int> GetDependenciesTree(string NameOfLibrary, int level)
+        private static void PrintGraphvizCode(List<string> dependenciesList)
+        {
+            Console.WriteLine("digraph G {");
+            foreach (var dependency in dependenciesList)
+            {
+                Console.WriteLine("\t" + dependency);
+            }
+            Console.WriteLine("}");
+        }
+
+        private static async Task<List<string>> GetDependenciesList()
+        {
+            var dependenciesList = new List<string>();
+            using (StreamReader reader = new StreamReader(MetadataPath))
+            {
+                string line;
+                while ((line = await reader.ReadLineAsync()) != null)
+                {
+                    if (line.Contains("Requires-Dist:"))
+                    {
+                        var separated_line = line.Split(' ');
+                        dependenciesList.Add(separated_line[1] + separated_line[2]);
+                    }
+                }
+            }
+
+            return dependenciesList;
+        }
+
+        private static void GetMetadata(string MetaDataURL)
+        {
+            using (WebClient wc = new WebClient())
+            {
+                wc.DownloadFile(MetaDataURL, PathToLoad);
+                ZipArchive archive = ZipFile.OpenRead(PathToLoad);
+                foreach (var entry in archive.Entries)
+                {
+                    if (entry.FullName.EndsWith("METADATA"))
+                    {
+                        entry.ExtractToFile(MetadataPath);
+
+                    }
+                }
+            }
+        }
+
+        private static async Task<string> GetUrlToMetadata(string NameOfLibrary)
+        {
+            var httpClient = new HttpClient();
+
+            var json = await httpClient.GetStringAsync(PypiURL + NameOfLibrary + "/json");
+            JObject Json = JObject.Parse(json);
+            var version = Json["info"]["version"].ToString();
+            var releases = Json["releases"];
+            var lastRelease = releases[version][0];
+            var MetadataURL = lastRelease["url"].ToString();
+            return MetadataURL;
+        }
+
+        /*private static async Task<int> GetDependenciesTree(string NameOfLibrary, int level)
         {
             string GitHubURL = await GetGitHubOfLibrary(NameOfLibrary);
             if (GitHubURL == null)
@@ -103,10 +180,11 @@ namespace visualizer
             //Console.WriteLine(SetupURL);
 
         }
+    }*/
+
+
+
+
+
     }
-
-
-
-
-   
 }

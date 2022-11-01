@@ -1,0 +1,8 @@
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\git visualizer\GitVisualizer\GitVisualizer\bin\Debug\GitVisualizer.exe.config
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\git visualizer\GitVisualizer\GitVisualizer\bin\Debug\GitVisualizer.exe
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\git visualizer\GitVisualizer\GitVisualizer\bin\Debug\GitVisualizer.pdb
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\git visualizer\GitVisualizer\GitVisualizer\obj\Debug\GitVisualizer.csproj.AssemblyReference.cache
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\git visualizer\GitVisualizer\GitVisualizer\obj\Debug\GitVisualizer.csproj.SuggestedBindingRedirects.cache
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\git visualizer\GitVisualizer\GitVisualizer\obj\Debug\GitVisualizer.csproj.CoreCompileInputs.cache
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\git visualizer\GitVisualizer\GitVisualizer\obj\Debug\GitVisualizer.exe
+C:\Users\vladv\OneDrive\Рабочий стол\ConfigHW\ConfigHW\git visualizer\GitVisualizer\GitVisualizer\obj\Debug\GitVisualizer.pdb

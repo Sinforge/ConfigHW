@@ -23,10 +23,11 @@ namespace GitVisualizer
             Console.WriteLine("digraph D {");
             for (int i = 0; i < objects.Length - 1; i++)
             {
-                string[] objectInfo = objects[i].Split(' ');
-                if (objectInfo != null && objectInfo.Length > 0 && objects[i].Contains("\tcommit"))
+                string[] commitInfo = objects[i].Split('\t');
+                string[] objectInfo = commitInfo[0].Split(' ');
+                if (objectInfo != null && objectInfo.Length > 0 && (objects[i].Contains("\tcommit") || objects[i].Contains("\tmerge")))
                 {
-                    list.Add("\"" + objectInfo[0] + "\"" + " -> " + "\"" + objectInfo[1] + "\"");
+                    list.Add("\"" + objectInfo[0] + "\"" + " -> " + "\"" + objectInfo[1] + "\" " +"[label=\"" + commitInfo[1] + "\"]");
                 }
             }
 
